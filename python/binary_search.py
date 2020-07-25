@@ -7,13 +7,18 @@ def binary_search(list, elem):
 
 
 def recursive_search(list, elem, min, max):
-    pointer = int(min+max/2)
+    pointer = int((min+max)/2)
     if list[pointer] == elem:
         return pointer
-    elif min == max:
-        return recursive_search(list, elem, pointer, max)
-    else:
-        return recursive_search(list, elem, min, pointer)
+    if pointer != max-1:
+        upper_half = recursive_search(list, elem, pointer, max)
+    if pointer != min:
+        lower_half = recursive_search(list, elem, min, pointer)
+    if upper_half != -1:
+        return upper_half
+    if lower_half != -1:
+        return lower_half
+    return -1
 
 
 def simple_test():
