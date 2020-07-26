@@ -1,6 +1,8 @@
 import random
 
-#Binary Search on unsorted list. Not really useful, but an interesting thought experiment
+# Binary Search on unsorted list. Not really useful, but an interesting thought experiment
+
+
 def binary_search(list, elem):
     max = len(list)
     min = 0
