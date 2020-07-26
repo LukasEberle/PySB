@@ -1,5 +1,24 @@
 import random
 
+rolls = {
+    'rock': {
+        'defeats': ['scissors'],
+        'defeated_by': ['paper', 'well']
+    },
+    'paper': {
+        'defeats': ['rock', 'well'],
+        'defeated_by': ['scissors']
+    },
+    'scissors': {
+        'defeats': ['paper'],
+        'defeated_by': ['rock', 'well']
+    },
+    'well': {
+        'defeats': ['rock', 'scissors'],
+        'defeated_by': ['paper']
+    }
+}
+
 
 def main():
     print_header()
@@ -29,9 +48,9 @@ def best_of(rounds, player_1, player_2):
 
 
 def play_game(player_1, player_2):
-    rolls = ['rock', 'paper', 'scissors']
-    roll1 = get_roll(player_1, rolls)
-    roll2 = random.choice(rolls)
+    roll_names = list(rolls.keys())
+    roll1 = get_roll(player_1, roll_names)
+    roll2 = random.choice(roll_names)
     print(f"{player_1} rolled {roll1} and {player_2} rolled {roll2}!")
     winner = find_winner(player_1, roll1, player_2, roll2)
     if winner is None:
@@ -41,35 +60,23 @@ def play_game(player_1, player_2):
     return winner
 
 
-def get_roll(player, rolls):
-    roll = input(f"{player}, what is your roll? {rolls}: ")
+def get_roll(player, roll_names):
+    roll = input(f"{player}, what is your roll? {roll_names}: ")
     roll = roll.lower().strip()
-    if roll not in rolls:
+    if roll not in roll_names:
         print(f"{roll}, is not a valid option!")
-        roll = get_roll(player, rolls)
+        roll = get_roll(player, roll_names)
     return roll
 
 
 def find_winner(player_1, roll1, player_2, roll2):
-    winner = None
     if roll1 == roll2:
-        pass
-    elif roll1 == 'rock':
-        if roll2 == 'paper':
-            winner = player_2
-        elif roll2 == 'scissors':
-            winner = player_1
-    elif roll1 == 'paper':
-        if roll2 == 'scissors':
-            winner = player_2
-        elif roll2 == 'rock':
-            winner = player_1
-    elif roll1 == 'scissors':
-        if roll2 == 'rock':
-            winner = player_2
-        elif roll2 == 'paper':
-            winner = player_1
-    return winner
+        return None
+    outcome = rolls.get(roll1)
+    if roll2 in outcome.get('defeats'):
+        return player_1
+    if roll2 in outcome.get('defeated_by'):
+        return player_2
 
 
 if __name__ == '__main__':
