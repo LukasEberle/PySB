@@ -12,7 +12,7 @@ num_of_tries = 1
 max_tries = 7
 
 while num_of_tries <= max_tries:
-    guess = input(f"Pleas submit your guess number {num_of_tries}: ")
+    guess = input(f"Please submit your guess number {num_of_tries}: ")
     guess_int = int(guess)
     if guess_int == solution:
         print("Congratulations you won!")
