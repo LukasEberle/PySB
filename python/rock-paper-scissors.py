@@ -2,20 +2,24 @@ import random
 
 rolls = {
     'rock': {
-        'defeats': ['scissors'],
+        'defeats': ['scissors', 'sponge'],
         'defeated_by': ['paper', 'well']
     },
     'paper': {
         'defeats': ['rock', 'well'],
-        'defeated_by': ['scissors']
+        'defeated_by': ['scissors', 'sponge']
     },
     'scissors': {
-        'defeats': ['paper'],
+        'defeats': ['paper', 'sponge'],
         'defeated_by': ['rock', 'well']
     },
     'well': {
         'defeats': ['rock', 'scissors'],
-        'defeated_by': ['paper']
+        'defeated_by': ['paper', 'sponge']
+    },
+    'sponge': {
+        'defeats': ['paper', 'well'],
+        'defeated_by': ['rock', 'scissors']
     }
 }
 
