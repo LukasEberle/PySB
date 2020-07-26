@@ -3,23 +3,23 @@ import random
 # Binary Search on unsorted list. Not really useful, but an interesting thought experiment
 
 
-def binary_search(list, elem):
-    max = len(list)
+def binary_search(lst, elem):
+    max = len(lst)
     min = 0
-    return recursive_search(list, elem, min, max)
+    return recursive_search(lst, elem, min, max)
 
 
-def recursive_search(list, elem, min, max):
+def recursive_search(lst, elem, min, max):
     pointer = int((min+max)/2)
     candidate = -1
 
-    if list[pointer] == elem:
+    if lst[pointer] == elem:
         return pointer
 
-    candidate = recursive_search(list, elem, pointer, max)
+    candidate = recursive_search(lst, elem, pointer, max)
     if candidate != -1:
         return candidate
-    candidate = recursive_search(list, elem, min, pointer)
+    candidate = recursive_search(lst, elem, min, pointer)
     if candidate != -1:
         return candidate
     return -1
