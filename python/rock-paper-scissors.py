@@ -1,30 +1,11 @@
+import json
 import random
 
-rolls = {
-    'rock': {
-        'defeats': ['scissors', 'sponge'],
-        'defeated_by': ['paper', 'well']
-    },
-    'paper': {
-        'defeats': ['rock', 'well'],
-        'defeated_by': ['scissors', 'sponge']
-    },
-    'scissors': {
-        'defeats': ['paper', 'sponge'],
-        'defeated_by': ['rock', 'well']
-    },
-    'well': {
-        'defeats': ['rock', 'scissors'],
-        'defeated_by': ['paper', 'sponge']
-    },
-    'sponge': {
-        'defeats': ['paper', 'well'],
-        'defeated_by': ['rock', 'scissors']
-    }
-}
+rolls = {}
 
 
 def main():
+    load_rolls()
     print_header()
     player = input("What's the name of Player 1? ")
     ai = "COM"
@@ -81,6 +62,13 @@ def find_winner(player_1, roll1, player_2, roll2):
         return player_1
     if roll2 in outcome.get('defeated_by'):
         return player_2
+
+
+def load_rolls():
+    global rolls
+    filename = '../data/rps-rules.json'
+    with open(filename, 'r', encoding='utf-8') as data:
+        rolls = json.load(data)
 
 
 if __name__ == '__main__':
