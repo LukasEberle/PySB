@@ -1,5 +1,3 @@
-
-
 def main():
     board = [
         [None, None, None],
