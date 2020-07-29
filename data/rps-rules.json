@@ -1,0 +1,22 @@
+{
+    "rock": {
+        "defeats": ["scissors", "sponge"],
+        "defeated_by": ["paper", "well"]
+    },
+    "paper": {
+        "defeats": ["rock", "well"],
+        "defeated_by": ["scissors", "sponge"]
+    },
+    "scissors": {
+        "defeats": ["paper", "sponge"],
+        "defeated_by": ["rock", "well"]
+    },
+    "well": {
+        "defeats": ["rock", "scissors"],
+        "defeated_by": ["paper", "sponge"]
+    },
+    "sponge": {
+        "defeats": ["paper", "well"],
+        "defeated_by": ["rock", "scissors"]
+    }
+}
