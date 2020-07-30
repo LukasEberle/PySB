@@ -1,11 +1,12 @@
 import json
 import random
-import colorama
+from colorama import Fore
 
 rolls = {}
 
 
 def main():
+    print(Fore.WHITE)
     load_rolls()
     print_header()
     player = input("What's the name of Player 1? ")
@@ -14,9 +15,11 @@ def main():
 
 
 def print_header():
+    print(Fore.LIGHTMAGENTA_EX)
     print("-------------------")
     print("Rock Paper Scissors")
     print("-------------------")
+    print(Fore.WHITE)
 
 
 def best_of(rounds, player_1, player_2):
@@ -37,12 +40,16 @@ def play_game(player_1, player_2):
     roll_names = list(rolls.keys())
     roll1 = get_roll(player_1, roll_names)
     roll2 = random.choice(roll_names)
-    print(f"{player_1} rolled {roll1} and {player_2} rolled {roll2}!")
+    print(f"{player_1} rolled " + Fore.GREEN + f"{roll1}")
+    print(Fore.WHITE + f"and {player_2} rolled " + Fore.GREEN + f"{roll2}" + Fore.WHITE + "!")
+    print(Fore.WHITE)
     winner = find_winner(player_1, roll1, player_2, roll2)
     if winner is None:
-        print("The round ended in a draw!")
+        print(Fore.YELLOW + "The round ended in a draw!")
+        print(Fore.WHITE)
     else:
-        print(f"{winner} won this round!")
+        print(Fore.YELLOW + f"{winner} won this round!")
+        print(Fore.WHITE)
     return winner
 
 
@@ -50,7 +57,8 @@ def get_roll(player, roll_names):
     roll = input(f"{player}, what is your roll? {roll_names}: ")
     roll = roll.lower().strip()
     if roll not in roll_names:
-        print(f"{roll}, is not a valid option!")
+        print(Fore.LIGHTRED_EX + f"{roll}, is not a valid option!")
+        print(Fore.WHITE)
         roll = get_roll(player, roll_names)
     return roll
 
