@@ -1,6 +1,9 @@
 import json
 import random
+import os
 from colorama import Fore
+from prompt_toolkit import prompt
+from prompt_toolkit.completion import WordCompleter
 
 rolls = {}
 
@@ -54,7 +57,13 @@ def play_game(player_1, player_2):
 
 
 def get_roll(player, roll_names):
-    roll = input(f"{player}, what is your roll? {roll_names}: ")
+    print(f"Rolls available: {', '.join(roll_names)}.")
+    if os.environ.get('PYCHARM_HOSTED') == "1":
+        print(Fore.LIGHTRED_EX + "Warning: Some Features are not available, when run in PyCharm")
+        roll = input(Fore.WHITE + f"{player}, what is your roll: ")
+    else:
+        word_comp = WordCompleter(roll_names)
+        roll = prompt(f"{player}, what is your roll: ", completer=word_comp)
     roll = roll.lower().strip()
     if roll not in roll_names:
         print(Fore.LIGHTRED_EX + f"{roll}, is not a valid option!")
