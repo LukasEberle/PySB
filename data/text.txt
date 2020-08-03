@@ -1,4 +1,4 @@
 Well this is weird. Here is a file and it contains some useful information of a specific kind.
 You can call me on my american number 415-555-1234 or on my german mobile 0123 123456, if you are in Germany or with +49123 123456 from outside.
-Here is a fun fact: The + in the phone number abbreviates a 00 so the number would actually be 00123 123456.
+Here is a fun fact: The + in the phone number abbreviates a 00 so the number would actually be 0049123 123456.
 I check my mails every weekday, so you could also contact me at John-Smith@globalplayer.com. Oh wait it is j.smith@globalplayer.com.
