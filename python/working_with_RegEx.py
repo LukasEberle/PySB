@@ -20,6 +20,11 @@ def get_german_numbers(msg):
     match_object = german_format.findall(msg)
     return match_object
 
+def get_email(msg):
+    email_format = re.compile(r'\w+@\w+\.\w+')
+    match_object = email_format.findall(msg)
+    return match_object
+
 
 if __name__ == "__main__":
     main()
