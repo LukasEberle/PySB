@@ -1,20 +1,19 @@
+#In Germany we would say "Dieses Programm tut Pi raten!" and I think this is beautiful!
 import random
 import math
 
 
 def main():
-    x = estimate_pi(10)
-    print(f"Estimation with 10 points: {x}. The absolute mistake is {abs(x - math.pi)}!")
-    x = estimate_pi(100)
-    print(f"Estimation with 100 points: {x}. The absolute mistake is {abs(x - math.pi)}!")
-    x = estimate_pi(1000)
-    print(f"Estimation with 1000 points: {x}. The absolute mistake is {abs(x - math.pi)}!")
-    x = estimate_pi(10000)
-    print(f"Estimation with 10000 points: {x}. The absolute mistake is {abs(x - math.pi)}!")
-    x = estimate_pi(100000)
-    print(f"Estimation with 100000 points: {x}. The absolute mistake is {abs(x - math.pi)}!")
-    x = estimate_pi(1000000)
-    print(f"Estimation with 1000000 points: {x}. The absolute mistake is {abs(x - math.pi)}!")
+    print_controller(10)
+    print_controller(100)
+    print_controller(1000)
+    print_controller(10000)
+    print_controller(100000)
+    print_controller(1000000)
+
+
+def print_controller(num):
+    print(f"Estimation with {num} points: {estimate_pi(num)}. The absolute mistake is {abs(estimate_pi(num) - math.pi)}!")
 
 
 def estimate_pi(num):
