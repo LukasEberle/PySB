@@ -6,8 +6,10 @@ import os
 def main():
     text = pyperclip.paste()
     res_file_path = os.path.join('..', 'data', 'contacts.txt')
-    print(res_file_path)
-    print(get_contact_information(text))
+    result = get_contact_information(text)
+    res_file = open(res_file_path, 'a')
+    res_file.write(result + "\n")
+    res_file.close()
 
 
 def get_american_numbers(msg):
