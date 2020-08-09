@@ -1,9 +1,12 @@
 import re
 import pyperclip
+import os
 
 
 def main():
     text = pyperclip.paste()
+    res_file_path = os.path.join('..', 'data', 'contacts.txt')
+    print(res_file_path)
     print(get_contact_information(text))
 
 
