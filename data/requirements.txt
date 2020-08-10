@@ -2,3 +2,4 @@ colorama
 prompt_toolkit
 pyperclip
 requests
+beautifulsoup4
