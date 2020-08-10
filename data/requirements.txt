@@ -1,3 +1,4 @@
 colorama
 prompt_toolkit
 pyperclip
+requests
