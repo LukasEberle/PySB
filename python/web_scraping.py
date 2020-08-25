@@ -1,11 +1,9 @@
-#import webbrowser
-import sys
+# import webbrowser
 import requests
 import bs4
 
 
-#webbrowser.open('https://antenneakiba.podigee.io/about')
-sys.argv
+# webbrowser.open('https://antenneakiba.podigee.io/about')
 res = requests.get('https://antenneakiba.podigee.io/about')
 res.raise_for_status()
 soup = bs4.BeautifulSoup(res.text, 'html.parser')
