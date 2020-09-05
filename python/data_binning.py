@@ -9,7 +9,7 @@ def main():
 
 def equal_width(arr, k):
     min_arr = min(arr)
-    w = int((max(arr)-min_arr)/k)
+    w = int((max(arr)-min_arr)/k)   #Width of the interval
     result = []
     boundaries = []
     for i in range(0, k+1):
@@ -24,7 +24,16 @@ def equal_width(arr, k):
 
 
 def equal_frequency(arr, k):
-    pass
+    length = len(arr)
+    n = int(length/k)   #Number of elements per bin
+    result = []
+    for i in range(0, k):
+        tmp = []
+        for j in range(i * n, (i + 1) * n):
+            if j >= length:
+                break
+            tmp = tmp + [arr[j]]
+        result.append(tmp)
 
 
 if __name__ == '__main__':
