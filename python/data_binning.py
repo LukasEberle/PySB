@@ -1,4 +1,4 @@
-import math
+from math import ceil
 
 
 input1 = [0, 4, 12, 16, 16, 18, 24, 26, 28]
@@ -17,7 +17,7 @@ def main():
 
 def equal_width(arr, k):
     min_arr = min(arr)
-    w = int(math.ceil((max(arr)-min_arr)/k))   #Width of the interval
+    w = int(ceil((max(arr)-min_arr)/k))   #Width of the interval
     result = []
     boundaries = []
     for i in range(0, k+1):
