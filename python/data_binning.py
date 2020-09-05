@@ -4,7 +4,12 @@ input3 = [5, 10, 11, 13, 15, 35, 50, 55, 72, 92, 204, 215]
 
 
 def main():
-    pass
+    print(f"Equal width of input1 is {equal_width(input1, 3)}\n")
+    print(f"Equal frequency of input1 is {equal_frequency(input1, 3)}\n")
+    print(f"Equal width of input2 is {equal_width(input2, 3)}\n")
+    print(f"Equal frequency of input2 is {equal_frequency(input2, 3)}\n")
+    print(f"Equal width of input3 is {equal_width(input3, 3)}\n")
+    print(f"Equal frequency of input3 is {equal_frequency(input3, 3)}\n")
 
 
 def equal_width(arr, k):
