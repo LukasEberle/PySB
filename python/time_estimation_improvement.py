@@ -1,7 +1,12 @@
 import csv
 import json
 import os
-from datetime import timedelta
+
+
+class Time:
+    def __init__(self, hours, minutes, seconds):
+        self.hms = [hours, minutes, seconds]
+
 
 time_file = '../data/times_test.csv'
 goal_file = '../data/working_set.json'
