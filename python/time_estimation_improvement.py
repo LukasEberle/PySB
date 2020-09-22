@@ -6,19 +6,21 @@ from math import floor
 
 class Time:
     def __init__(self, hours, minutes, seconds):
-        self.hms = [hours, minutes, seconds]
+        m = minutes + floor(seconds / 60)
+        h = hours + floor(m / 60)
+        self.hms = [h, (m % 60), (seconds % 60)]
 
     def __add__(self, other):
         sec = self.hms[2] + other.hms[2]
-        m = self.hms[1] + other.hms[1] + floor(sec/60)
-        h = self.hms[0] + other.hms[0] + floor(m/60)
-        return Time(h, (m % 60), (sec % 60))
+        m = self.hms[1] + other.hms[1]
+        h = self.hms[0] + other.hms[0]
+        return Time(h, m, sec)
 
     def __mul__(self, other):
         sec = round(self.hms[2] * other)
-        m = round(self.hms[1] * other) + floor(sec/60)
-        h = round(self.hms[0] * other) + floor(min/60)
-        return Time(h, (m % 60), (sec % 60))
+        m = round(self.hms[1] * other)
+        h = round(self.hms[0] * other)
+        return Time(h, m, sec)
 
     def get_time(self):
         return self.hms
@@ -44,7 +46,7 @@ def main():
 
 
 def new_prediction(predicted_time, used_time, alpha=0.1):
-    return alpha * used_time + (1 - alpha) * predicted_time
+    return (used_time * alpha) + (predicted_time * (1 - alpha))
 
 
 def load_times():
@@ -70,29 +72,6 @@ def str_sec(time_text):
     return int(time_text[6:])
 
 
-def translate_time(hours, minute, sec):
-    formatted_sec = sec % 60
-    formatted_min = minute + sec // 60
-    formatted_hours = hours + formatted_min // 60
-    formatted_min = formatted_min % 60
-    result = make_valid_time_str(formatted_hours)+":"
-    result += make_valid_time_str(formatted_min)+":"+make_valid_time_str(formatted_sec)
-    return result
-
-
-def make_valid_time_str(time):
-    round(time)
-    if time/10 < 1:
-        return f"0{time}"
-    else:
-        return f"{time}"
-
-
-def translate_in_sec(hours, minutes, sec):
-    whole_minutes = minutes + (hours * 60)
-    return sec + (whole_minutes * 60)
-
-
 def element_wise_add(first, second):
     result = []
     for (item1, item2) in zip(first, second):
@@ -100,19 +79,14 @@ def element_wise_add(first, second):
     return result
 
 
-def to_list(time_str):
-    return [str_h(time_str), str_min(time_str), str_sec(time_str)]
-
-
 def update_times():
     for key in times:
         goal = times[key]["goal"]
         done = times[key]["done"]
-        goal_sec = translate_in_sec(goal[0], goal[1], goal[2])
-        done_sec = translate_in_sec(done[0], done[1], done[2])
+        goal_sec = Time(goal[0], goal[1], goal[2])
+        done_sec = Time(done[0], done[1], done[2])
         new_goal = new_prediction(goal_sec, done_sec)
-        new_goal = translate_time(0, 0, new_goal)
-        times[key]["goal"] = to_list(new_goal)
+        times[key]["goal"] = new_goal.get_time()
         times[key]["done"] = [0, 0, 0]
 
 
