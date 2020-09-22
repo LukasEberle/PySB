@@ -1,11 +1,27 @@
 import csv
 import json
 import os
+from math import floor
 
 
 class Time:
     def __init__(self, hours, minutes, seconds):
         self.hms = [hours, minutes, seconds]
+
+    def __add__(self, other):
+        sec = self.hms[2] + other.hms[2]
+        m = self.hms[1] + other.hms[1] + floor(sec/60)
+        h = self.hms[0] + other.hms[0] + floor(m/60)
+        return Time(h, (m % 60), (sec % 60))
+
+    def __mul__(self, other):
+        sec = round(self.hms[2] * other)
+        m = round(self.hms[1] * other) + floor(sec/60)
+        h = round(self.hms[0] * other) + floor(min/60)
+        return Time(h, (m % 60), (sec % 60))
+
+    def get_time(self):
+        return self.hms
 
 
 time_file = '../data/times_test.csv'
