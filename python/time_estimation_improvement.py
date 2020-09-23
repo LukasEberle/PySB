@@ -2,7 +2,7 @@ import csv
 import json
 import os
 from math import floor
-
+from datetime import datetime
 
 class Time:
     def __init__(self, hours, minutes, seconds):
@@ -42,6 +42,7 @@ def main():
     load_times()
     update_times()
     print(times)
+    generate_new_plan()
 
 
 def new_prediction(predicted_time, used_time, alpha=0.1):
@@ -57,6 +58,9 @@ def load_times():
             duration = row[11]
             if project in times.keys():
                 times[project]["done"] = element_wise_add(times[project]["done"], [str_h(duration), str_min(duration), str_sec(duration)])
+            elif project in groups.keys():
+                project_group = groups[project]
+                times[project_group]["done"] = element_wise_add(times[project_group]["done"], [str_h(duration), str_min(duration), str_sec(duration)])
 
 
 def str_h(time_text):
@@ -87,6 +91,26 @@ def update_times():
         new_goal = new_prediction(goal_sec, done_sec)
         times[key]["goal"] = new_goal.get_time()
         times[key]["done"] = done_sec.get_time()
+
+
+def make_string(time_list):
+    result = ""
+    for digit in time_list:
+        if result != "":
+            result += ":"
+        result += str(digit)
+    return result
+
+
+def make_title():
+    date = datetime.date(datetime.now())
+    return f"{date}" + "_plan.txt"
+
+
+def generate_new_plan():
+    f = open(make_title(), "a")
+    for project in times:
+        f.write(project + ": " + make_string(times[project]["goal"]) + "\n")
 
 
 if __name__ == '__main__':
