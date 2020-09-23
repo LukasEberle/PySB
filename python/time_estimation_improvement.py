@@ -4,6 +4,7 @@ import os
 from math import floor
 from datetime import datetime
 
+
 class Time:
     def __init__(self, hours, minutes, seconds):
         m = minutes + floor(seconds / 60)
@@ -41,7 +42,6 @@ def main():
     csv.Dialect.delimiter = ','
     load_times()
     update_times()
-    print(times)
     generate_new_plan()
 
 
