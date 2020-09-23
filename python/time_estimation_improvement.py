@@ -17,10 +17,9 @@ class Time:
         return Time(h, m, sec)
 
     def __mul__(self, other):
-        sec = round(self.hms[2] * other)
-        m = round(self.hms[1] * other)
-        h = round(self.hms[0] * other)
-        return Time(h, m, sec)
+        sec = self.hms[2] + ((self.hms[1]+(self.hms[0] * 60)) * 60)
+        sec = round(sec * other)
+        return Time(0, 0, sec)
 
     def get_time(self):
         return self.hms
@@ -87,7 +86,7 @@ def update_times():
         done_sec = Time(done[0], done[1], done[2])
         new_goal = new_prediction(goal_sec, done_sec)
         times[key]["goal"] = new_goal.get_time()
-        times[key]["done"] = [0, 0, 0]
+        times[key]["done"] = done_sec.get_time()
 
 
 if __name__ == '__main__':
