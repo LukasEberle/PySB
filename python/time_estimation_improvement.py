@@ -33,6 +33,8 @@ times = {}
 groups = {}
 with open(goal_file, 'r', encoding='utf-8') as data:
     times = json.load(data)
+for key in times:
+    times[key]["done"] = [0, 0, 0]
 if os.path.isfile(project_groups_file):
     with open(project_groups_file, 'r', encoding='utf-8') as data:
         groups = json.load(data)
@@ -54,8 +56,8 @@ def load_times():
         time_reader = csv.reader(data, delimiter=',')
         next(time_reader)
         for row in time_reader:
-            project = row[3]
-            duration = row[11]
+            project = row[0]
+            duration = row[3]
             if project in times.keys():
                 times[project]["done"] = element_wise_add(times[project]["done"], [str_h(duration), str_min(duration), str_sec(duration)])
             elif project in groups.keys():
@@ -102,15 +104,17 @@ def make_string(time_list):
     return result
 
 
-def make_title():
+def make_title(name, data_format):
     date = datetime.date(datetime.now())
-    return f"{date}" + "_plan.txt"
+    return f"{date}" + f"{name}" + "." + f"{data_format}"
 
 
 def generate_new_plan():
-    f = open(make_title(), "a")
+    f = open(make_title("plan", "txt"), "a")
     for project in times:
         f.write(project + ": " + make_string(times[project]["goal"]) + "\n")
+    with open(make_title("working_set", "json"), 'w', encoding='utf-8') as new_plan:
+        json.dump(times, new_plan)
 
 
 if __name__ == '__main__':
