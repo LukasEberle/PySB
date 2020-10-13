@@ -25,7 +25,7 @@ def start_game(players):
 def check_for_killer():
     for case in suspects:
         if len(case) == 1:
-            killer = case
+            killer = case[0]
             suspects.remove(case)
             return killer
     return "No Confirmed Killer"
