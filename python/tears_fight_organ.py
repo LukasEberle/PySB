@@ -73,6 +73,11 @@ def parser(arguments, turn, participants):
             return
         elif arguments[0] == "help":
             help_cmd()
+        elif arguments[0] == "hit":
+            if len(arguments) == 3:
+                hit_for(turn_dict[arguments[1]][0], int(arguments[2]))
+            else:
+                print(f"{sys_name} Ungültige Parameter! Versuche es erneut!")
         elif arguments[0] == "quit":
             check = input(f"{sys_name} Bist du sicher, das du das Skript beenden möchtest?\n\t"
                           f"Dadurch werden alle Daten zurückgesetzt [j/n]: ")
@@ -127,9 +132,9 @@ def hit_for(fighter, dmg):
         true_dmg = 0
     fighter.le_ -= true_dmg
     if fighter.le_ <= 0:
-        print(f"Die LE von {str(fighter)} ist auf 0 oder weniger gefallen und wird aus dem Kampf genommen!")
+        print(f"\tDie LE von {str(fighter)} ist auf 0 oder weniger gefallen!\n")
     else:
-        print(f"{str(fighter)} hat noch {fighter.le_} LE übrig.")
+        print(f"\t{str(fighter)} hat noch {fighter.le_} LE übrig.\n")
 
 
 def help_cmd():

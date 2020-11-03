@@ -6,6 +6,9 @@
         Ändert die initiative eines Charakters zu dem angegebenen Wert
     [end]   Beendet die aktuelle Runde, der Kampf geht aber weiter.
     [help]  Gibt alle verfügbaren Kommandos und deren Parameter, falls vorhanden, an.
+    [hit]   Parameter: Name des Getroffenen, Schaden
+        Fügt dem angegebenen Charakter Schaden in Höhe des zweiten Parameters zu.
+        Gibt man negativen Schaden an, wird der Getroffene stattdessen geheilt.
     [quit]  Beendet den Kampf und das Skript. Muss nochmal bejaht werden!
     [rm]    Parameter: Name des zu entfernenden Charakters
         Entfernt den angegebenen Charakter!
