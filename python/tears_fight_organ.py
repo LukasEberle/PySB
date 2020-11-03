@@ -1,49 +1,68 @@
 class Fighter:
-    def __init__(self, name, le, ini, entry, armor):
+    def __init__(self, name, le, ini, armor):
         self.name_ = name
         self.le_ = le
         self.ini_ = ini
-        self.next_turn_ = entry
         self.armor_ = armor
 
     def __str__(self):
         return self.name_
 
-    def update_next_turn(self):
-        self.next_turn_ = self.next_turn_ + self.ini_
-        return self.next_turn_
-
 
 turn_dict = {}
-fighter_set = set()
 
 
 def main():
     current_turn = 0
+    listener(current_turn)
 
 
-def lexer():
+def listener(turn):
+    cmd_in = input("[T.E.A.R.S. F.O.] Was willst du tun: ")
+    lexer(cmd_in, turn)
+
+
+def lexer(cmd, turn):
     pass
 
 
-def parser():
+def parser(arguments, turn):
     pass
 
 
-def add_fighter(name, le, ini, armor=0):
-    fighter_set.add(Fighter(name, le, ini, current_turn, armor))
+def add_fighter(turn, name, le, ini, armor=0):
+    new_fighter = Fighter(name, le, ini, armor)
+    turn_dict[str(new_fighter)] = turn + new_fighter.ini_
 
 
 def delete_fighter(fighter):
-    fighter_set.remove(fighter)
+    turn_dict.pop(str(fighter))
 
 
 def change_ini(fighter, ini):
     fighter.ini_ = ini
 
 
-def end_turn(turn, participants):
+def next_turn_for(participants):
     for fighter in participants:
-        fighter.update_next_turn()
-    turn += 1
+        turn_dict[str(fighter)] += fighter.ini_
+
+
+def hit_for(fighter, dmg):
+    if dmg >= fighter.armor_:
+        true_dmg = dmg - fighter.armor_
+    elif dmg < 0:
+        true_dmg = dmg
+    else:
+        true_dmg = 0
+    fighter.le_ -= true_dmg
+    if fighter.le_ <= 0:
+        print(f"Die LE von {str(fighter)} ist auf 0 oder weniger gefallen und wird aus dem Kampf genommen!")
+        delete_fighter(fighter)
+    else:
+        print(f"{str(fighter)} hat noch {fighter.le_} LE übrig.")
+
+
+if __name__ == "__main__":
+    main()
 
