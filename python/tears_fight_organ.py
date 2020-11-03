@@ -33,11 +33,13 @@ def listener(turn, participants):
                 p.add(str(elem))
             print(f"{sys_name} {participants} können handeln!")
     cmd_in = input(f"{sys_name} Was willst du tun: ")
-    lexer(cmd_in, turn)
+    lexer(cmd_in, turn, participants)
 
 
 def lexer(cmd, turn, participants):
-    pass
+    arguments = cmd.split()
+    print(arguments)
+    parser(arguments, turn, participants)
 
 
 def parser(arguments, turn, participants):
