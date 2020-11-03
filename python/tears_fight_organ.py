@@ -78,6 +78,9 @@ def parser(arguments, turn, participants):
                 hit_for(turn_dict[arguments[1]][0], int(arguments[2]))
             else:
                 print(f"{sys_name} Ungültige Parameter! Versuche es erneut!")
+        elif arguments[0] == "list":
+            for key in turn_dict:
+                print_info(key)
         elif arguments[0] == "quit":
             check = input(f"{sys_name} Bist du sicher, das du das Skript beenden möchtest?\n\t"
                           f"Dadurch werden alle Daten zurückgesetzt [j/n]: ")
@@ -141,6 +144,12 @@ def hit_for(fighter, dmg):
 def help_cmd():
     with open("../data/tears_commands", 'r', encoding='utf-8') as data:
         print(data.read())
+
+
+def print_info(key):
+    print(key)
+    print(f"Nächstes mal dran: Runde {turn_dict[key][1]}")
+    print(f"LE: {turn_dict[key][0].le_}\tINI: {turn_dict[key][0].ini_}\n")
 
 
 if __name__ == "__main__":

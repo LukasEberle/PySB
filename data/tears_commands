@@ -9,6 +9,7 @@
     [hit]   Parameter: Name des Getroffenen, Schaden
         Fügt dem angegebenen Charakter Schaden in Höhe des zweiten Parameters zu.
         Gibt man negativen Schaden an, wird der Getroffene stattdessen geheilt.
+    [list]  Listet die Kampfteilnehmer mit relevanten Informationen auf.
     [quit]  Beendet den Kampf und das Skript. Muss nochmal bejaht werden!
     [rm]    Parameter: Name des zu entfernenden Charakters
         Entfernt den angegebenen Charakter!
