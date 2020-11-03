@@ -19,7 +19,10 @@ sys_name = "[T.E.A.R.S. F.O.]"
 
 def main():
     current_turn = 0
-    listener(current_turn, [])
+    participants = []
+    while listener(current_turn, participants):
+        pass
+
 
 
 def listener(turn, participants):
@@ -33,12 +36,12 @@ def listener(turn, participants):
                 p.add(str(elem))
             print(f"{sys_name} {participants} können handeln!")
     cmd_in = input(f"{sys_name} Was willst du tun: ")
-    lexer(cmd_in, turn, participants)
+    return lexer(cmd_in, turn, participants)
 
 
 def lexer(cmd, turn, participants):
     arguments = cmd.split()
-    parser(arguments, turn, participants)
+    return parser(arguments, turn, participants)
 
 
 def parser(arguments, turn, participants):
@@ -50,11 +53,24 @@ def parser(arguments, turn, participants):
                 add_fighter(turn, arguments[1], int(arguments[2]), int(arguments[3]), int(arguments[4]))
             else:
                 print(f"{sys_name} Ungültige Parameter! Versuche es erneut!")
-        if arguments[0] == "end":
+        elif arguments[0] == "end":
             end_turn(turn, participants)
-            return
-        if arguments[0] == "help":
+            return True
+        elif arguments[0] == "help":
             help_cmd()
+        elif arguments[0] == "quit":
+            check = input(f"{sys_name} Bist du sicher, das du das Skript beenden möchtest?\n\t"
+                          f"Dadurch werden alle Daten zurückgesetzt [j/n]: ")
+            if check.strip().lower() == "j":
+                print(f"{sys_name} Vielen Dank für das nutzen eines {sys_name}-Terminals!")
+                print(f"{sys_name} Das Team wünscht viel Spaß im weiteren Abenteuers!")
+                return False
+            elif check.strip().lower() == "n":
+                pass
+            else:
+                print(f"{sys_name} Ungültige Eingabe! Bitte gebe \'j\' oder \'n\' ein!\n\tZurück ins Rundenmenu!")
+        else:
+            print(f"\'{arguments[0]}\' ist kein gültiges Kommando. Wenn du nicht weiter weißt nutze bitte \'help\'.")
     else:
         print(f"{sys_name} Es ist ein Fehler aufgetreten! Versuche es erneut!")
     listener(turn, participants)
