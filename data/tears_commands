@@ -1,0 +1,3 @@
+[add] Benötigt: Name, LE, INI und Optional Panzerungswert.
+    Fügt dem Kampf einen weiteren Teilnehmer hinzu.
+[help] Gibt alle verfügbaren Kommandos und deren Parameter an.

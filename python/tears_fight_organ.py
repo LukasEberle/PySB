@@ -52,6 +52,8 @@ def parser(arguments, turn, participants):
             else:
                 print(f"{sys_name} Ungültige Parameter! Versuche es erneut!")
                 listener(turn, participants)
+        if arguments[0] == "help":
+            help_cmd()
     else:
         print(f"{sys_name} Es ist ein Fehler aufgetreten! Versuche es erneut!")
         listener(turn, participants)
@@ -90,6 +92,11 @@ def hit_for(fighter, dmg):
         delete_fighter(fighter)
     else:
         print(f"{str(fighter)} hat noch {fighter.le_} LE übrig.")
+
+
+def help_cmd():
+    with open("../data/tears_commands", 'r', encoding='utf-8') as data:
+        print(data.read())
 
 
 if __name__ == "__main__":
