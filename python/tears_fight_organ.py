@@ -146,7 +146,7 @@ def hit_for(fighter, dmg):
 
 
 def help_cmd():
-    with open("../data/tears_commands", 'r', encoding='utf-8') as data:
+    with open("tears_commands", 'r', encoding='utf-8') as data:
         print(data.read())
 
 
