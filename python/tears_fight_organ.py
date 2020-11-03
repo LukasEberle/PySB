@@ -13,7 +13,6 @@ class Fighter:
 
 
 turn_dict = {}
-set_of_fighters = set()
 sys_name = "[T.E.A.R.S. F.O.]"
 
 
@@ -69,6 +68,11 @@ def parser(arguments, turn, participants):
                 pass
             else:
                 print(f"{sys_name} Ungültige Eingabe! Bitte gebe \'j\' oder \'n\' ein!\n\tZurück ins Rundenmenu!")
+        elif arguments[0] == "rm":
+            if arguments[1] in turn_dict.keys():
+                delete_fighter(arguments[1])
+            else:
+                print(f"{sys_name} {arguments[1]} ist kein Kampfteilnehmer! Bitte überprüfe deine Rechtschreibung.")
         else:
             print(f"\'{arguments[0]}\' ist kein gültiges Kommando. Wenn du nicht weiter weißt nutze bitte \'help\'.")
     else:
@@ -78,13 +82,13 @@ def parser(arguments, turn, participants):
 
 def add_fighter(turn, name, le, ini, armor=0):
     new_fighter = Fighter(name, le, ini, armor)
-    set_of_fighters.add(new_fighter)
     fighter_turn = (new_fighter, turn + new_fighter.ini_)
     turn_dict[str(new_fighter)] = fighter_turn
 
 
 def delete_fighter(fighter):
-    turn_dict.pop(str(fighter))
+    turn_dict.pop(fighter)
+    print(f"{sys_name} {fighter} wurde erfolgreich aus dem Kampf entfernt!")
 
 
 def change_ini(fighter, ini):
