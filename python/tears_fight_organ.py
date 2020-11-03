@@ -14,6 +14,7 @@ class Fighter:
 
 turn_dict = {}
 set_of_fighters = set()
+sys_name = "[T.E.A.R.S. F.O.]"
 
 
 def main():
@@ -22,7 +23,6 @@ def main():
 
 
 def listener(turn, participants):
-    sys_name = "[T.E.A.R.S. F.O.]"
     print(f"{sys_name} Aktuelle Runde: {turn}")
     if participants:
         if len(participants) == 1:
@@ -43,7 +43,18 @@ def lexer(cmd, turn, participants):
 
 
 def parser(arguments, turn, participants):
-    pass
+    if arguments:
+        if arguments[0] == "add":
+            if len(arguments) == 4:
+                add_fighter(turn, arguments[1], int(arguments[2]), int(arguments[3]))
+            elif len(arguments) == 5:
+                add_fighter(turn, arguments[1], int(arguments[2]), int(arguments[3]), int(arguments[4]))
+            else:
+                print(f"{sys_name} Ungültige Parameter! Versuche es erneut!")
+                listener(turn, participants)
+    else:
+        print(f"{sys_name} Es ist ein Fehler aufgetreten! Versuche es erneut!")
+        listener(turn, participants)
 
 
 def add_fighter(turn, name, le, ini, armor=0):
