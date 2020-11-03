@@ -108,13 +108,9 @@ def add_fighter(turn, participants, name, le, ini, armor=0):
     fighter_turn = (new_fighter, turn + new_fighter.ini_)
     turn_dict[str(new_fighter)] = fighter_turn
 
-# TODO: Same Turn deletion does not work
+
 def delete_fighter(fighter, participants):
     turn_dict.pop(fighter)
-    print(turn_dict)
-    if fighter in participants:
-        participants.remove(fighter)
-    print(participants)
     print(f"{sys_name} {fighter} wurde erfolgreich aus dem Kampf entfernt!")
 
 
@@ -124,7 +120,8 @@ def change_ini(fighter, ini):
 
 def end_turn(turn, participants):
     for fighter in participants:
-        turn_dict[str(fighter)] = (fighter, turn + fighter.ini_)
+        if fighter in turn_dict.keys():
+            turn_dict[str(fighter)] = (fighter, turn + fighter.ini_)
 
 
 def hit_for(fighter, dmg):
