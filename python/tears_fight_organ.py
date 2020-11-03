@@ -38,7 +38,6 @@ def listener(turn, participants):
 
 def lexer(cmd, turn, participants):
     arguments = cmd.split()
-    print(arguments)
     parser(arguments, turn, participants)
 
 
@@ -51,12 +50,14 @@ def parser(arguments, turn, participants):
                 add_fighter(turn, arguments[1], int(arguments[2]), int(arguments[3]), int(arguments[4]))
             else:
                 print(f"{sys_name} Ungültige Parameter! Versuche es erneut!")
-                listener(turn, participants)
+        if arguments[0] == "end":
+            end_turn(turn, participants)
+            return
         if arguments[0] == "help":
             help_cmd()
     else:
         print(f"{sys_name} Es ist ein Fehler aufgetreten! Versuche es erneut!")
-        listener(turn, participants)
+    listener(turn, participants)
 
 
 def add_fighter(turn, name, le, ini, armor=0):
@@ -74,9 +75,9 @@ def change_ini(fighter, ini):
     fighter.ini_ = ini
 
 
-def next_turn_for(participants):
+def end_turn(turn, participants):
     for fighter in participants:
-        turn_dict[str(fighter)] += fighter.ini_
+        turn_dict[str(fighter)] = (fighter, turn + fighter.ini_)
 
 
 def hit_for(fighter, dmg):
