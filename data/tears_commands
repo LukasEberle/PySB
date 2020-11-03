@@ -13,3 +13,5 @@
     [quit]  Beendet den Kampf und das Skript. Muss nochmal bejaht werden!
     [rm]    Parameter: Name des zu entfernenden Charakters
         Entfernt den angegebenen Charakter!
+    ['Name eines Charakters']   Schreibt man den Namen eines Kampfteilnehmers, werden einige
+        relevante Informationen aufgelistet.
