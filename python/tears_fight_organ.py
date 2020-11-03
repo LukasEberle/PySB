@@ -29,7 +29,7 @@ def main():
         for key in turn_dict.keys():
             if turn_dict[key][1] < next_turn:
                 next_turn = turn_dict[key][1]
-                participants = []
+                participants.clear()
                 participants.append(turn_dict[key][0])
             elif turn_dict[key][1] == next_turn:
                 participants.append(turn_dict[key][0])
@@ -38,11 +38,13 @@ def main():
 
 def listener(turn, participants):
     print(f"{sys_name} Aktuelle Runde: {turn}")
-    if participants:
+    if participants and turn > 0:
         if len(participants) == 1:
             print(f"{sys_name} {str(participants[0])} kann handeln!")
         elif len(participants) > 1:
             print(f"{sys_name} {participants} können handeln!")
+    elif participants and turn == 0:
+        print(f"{sys_name} {participants} nehmen aktuell an dem Kampf teil!")
     cmd_in = input(f"{sys_name} Was willst du tun: ")
     lexer(cmd_in, turn, participants)
 
@@ -61,8 +63,14 @@ def parser(arguments, turn, participants):
                 add_fighter(turn, participants, arguments[1], int(arguments[2]), int(arguments[3]), int(arguments[4]))
             else:
                 print(f"{sys_name} Ungültige Parameter! Versuche es erneut!")
+        elif arguments[0] == "change-ini":
+            if len(arguments) == 3:
+                change_ini(turn_dict[arguments[1]][0], int(arguments[2]))
+            else:
+                print(f"{sys_name} Ungültige Parameter! Versuche es erneut!")
         elif arguments[0] == "end":
             end_turn(turn, participants)
+            return
         elif arguments[0] == "help":
             help_cmd()
         elif arguments[0] == "quit":
@@ -120,7 +128,6 @@ def hit_for(fighter, dmg):
     fighter.le_ -= true_dmg
     if fighter.le_ <= 0:
         print(f"Die LE von {str(fighter)} ist auf 0 oder weniger gefallen und wird aus dem Kampf genommen!")
-        delete_fighter(fighter)
     else:
         print(f"{str(fighter)} hat noch {fighter.le_} LE übrig.")
 

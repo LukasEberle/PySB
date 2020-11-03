@@ -1,7 +1,9 @@
 [T.E.A.R.S. F.O.] Tippe eines der folgenden Kommandos ein. Falls nötig gebe die angegebenen Parameter an.
 
-    [add]   Parameter: Name, LE, INI und (Optional) Panzerungswert.
+    [add]   Parameter: Name, LE, INI, (Optional) Panzerungswert.
         Fügt dem Kampf einen weiteren Teilnehmer hinzu.
+    [change-ini]    Parameter: Name des Charakters, neuer Initiativ-Wert
+        Ändert die initiative eines Charakters zu dem angegebenen Wert
     [end]   Beendet die aktuelle Runde, der Kampf geht aber weiter.
     [help]  Gibt alle verfügbaren Kommandos und deren Parameter, falls vorhanden, an.
     [quit]  Beendet den Kampf und das Skript. Muss nochmal bejaht werden!
