@@ -8,31 +8,47 @@ class Fighter:
     def __str__(self):
         return self.name_
 
+    def __repr__(self):
+        return self.name_
+
 
 turn_dict = {}
+set_of_fighters = set()
 
 
 def main():
     current_turn = 0
-    listener(current_turn)
+    listener(current_turn, [])
 
 
-def listener(turn):
-    cmd_in = input("[T.E.A.R.S. F.O.] Was willst du tun: ")
+def listener(turn, participants):
+    sys_name = "[T.E.A.R.S. F.O.]"
+    print(f"{sys_name} Aktuelle Runde: {turn}")
+    if participants:
+        if len(participants) == 1:
+            print(f"{sys_name} {str(participants[1])} kann handeln!")
+        elif len(participants) > 1:
+            p = []
+            for elem in participants:
+                p.add(str(elem))
+            print(f"{sys_name} {participants} können handeln!")
+    cmd_in = input(f"{sys_name} Was willst du tun: ")
     lexer(cmd_in, turn)
 
 
-def lexer(cmd, turn):
+def lexer(cmd, turn, participants):
     pass
 
 
-def parser(arguments, turn):
+def parser(arguments, turn, participants):
     pass
 
 
 def add_fighter(turn, name, le, ini, armor=0):
     new_fighter = Fighter(name, le, ini, armor)
-    turn_dict[str(new_fighter)] = turn + new_fighter.ini_
+    set_of_fighters.add(new_fighter)
+    fighter_turn = (new_fighter, turn + new_fighter.ini_)
+    turn_dict[str(new_fighter)] = fighter_turn
 
 
 def delete_fighter(fighter):
