@@ -1,3 +1,7 @@
+import sys
+import time
+
+
 class Fighter:
     def __init__(self, name, le, ini, armor):
         self.name_ = name
@@ -19,42 +23,46 @@ sys_name = "[T.E.A.R.S. F.O.]"
 def main():
     current_turn = 0
     participants = []
-    while listener(current_turn, participants):
-        pass
-
+    while True:
+        listener(current_turn, participants)
+        next_turn = sys.maxsize
+        for key in turn_dict.keys():
+            if turn_dict[key][1] < next_turn:
+                next_turn = turn_dict[key][1]
+                participants = []
+                participants.append(turn_dict[key][0])
+            elif turn_dict[key][1] == next_turn:
+                participants.append(turn_dict[key][0])
+        current_turn = next_turn
 
 
 def listener(turn, participants):
     print(f"{sys_name} Aktuelle Runde: {turn}")
     if participants:
         if len(participants) == 1:
-            print(f"{sys_name} {str(participants[1])} kann handeln!")
+            print(f"{sys_name} {str(participants[0])} kann handeln!")
         elif len(participants) > 1:
-            p = []
-            for elem in participants:
-                p.add(str(elem))
             print(f"{sys_name} {participants} können handeln!")
     cmd_in = input(f"{sys_name} Was willst du tun: ")
-    return lexer(cmd_in, turn, participants)
+    lexer(cmd_in, turn, participants)
 
 
 def lexer(cmd, turn, participants):
     arguments = cmd.split()
-    return parser(arguments, turn, participants)
+    parser(arguments, turn, participants)
 
 
 def parser(arguments, turn, participants):
     if arguments:
         if arguments[0] == "add":
             if len(arguments) == 4:
-                add_fighter(turn, arguments[1], int(arguments[2]), int(arguments[3]))
+                add_fighter(turn, participants, arguments[1], int(arguments[2]), int(arguments[3]))
             elif len(arguments) == 5:
-                add_fighter(turn, arguments[1], int(arguments[2]), int(arguments[3]), int(arguments[4]))
+                add_fighter(turn, participants, arguments[1], int(arguments[2]), int(arguments[3]), int(arguments[4]))
             else:
                 print(f"{sys_name} Ungültige Parameter! Versuche es erneut!")
         elif arguments[0] == "end":
             end_turn(turn, participants)
-            return True
         elif arguments[0] == "help":
             help_cmd()
         elif arguments[0] == "quit":
@@ -63,7 +71,8 @@ def parser(arguments, turn, participants):
             if check.strip().lower() == "j":
                 print(f"{sys_name} Vielen Dank für das nutzen eines {sys_name}-Terminals!")
                 print(f"{sys_name} Das Team wünscht viel Spaß im weiteren Abenteuers!")
-                return False
+                time.sleep(2)
+                sys.exit(0)
             elif check.strip().lower() == "n":
                 pass
             else:
@@ -80,8 +89,9 @@ def parser(arguments, turn, participants):
     listener(turn, participants)
 
 
-def add_fighter(turn, name, le, ini, armor=0):
+def add_fighter(turn, participants, name, le, ini, armor=0):
     new_fighter = Fighter(name, le, ini, armor)
+    participants.append(new_fighter)
     fighter_turn = (new_fighter, turn + new_fighter.ini_)
     turn_dict[str(new_fighter)] = fighter_turn
 
