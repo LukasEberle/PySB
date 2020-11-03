@@ -92,7 +92,7 @@ def parser(arguments, turn, participants):
                 print(f"{sys_name} Ungültige Eingabe! Bitte gebe \'j\' oder \'n\' ein!\n\tZurück ins Rundenmenu!")
         elif arguments[0] == "rm":
             if arguments[1] in turn_dict.keys():
-                delete_fighter(arguments[1])
+                delete_fighter(arguments[1], participants)
             else:
                 print(f"{sys_name} {arguments[1]} ist kein Kampfteilnehmer! Bitte überprüfe deine Rechtschreibung.")
         else:
@@ -108,9 +108,13 @@ def add_fighter(turn, participants, name, le, ini, armor=0):
     fighter_turn = (new_fighter, turn + new_fighter.ini_)
     turn_dict[str(new_fighter)] = fighter_turn
 
-
-def delete_fighter(fighter):
+# TODO: Same Turn deletion does not work
+def delete_fighter(fighter, participants):
     turn_dict.pop(fighter)
+    print(turn_dict)
+    if fighter in participants:
+        participants.remove(fighter)
+    print(participants)
     print(f"{sys_name} {fighter} wurde erfolgreich aus dem Kampf entfernt!")
 
 
