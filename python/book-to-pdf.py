@@ -6,8 +6,10 @@ def add_blanks(pages, reader, writer):
     assert to_add != 0
     for i in range(1, (pages-1)):
         writer.addPage(reader.getPage(i))
+    blank_file = open(path_to_file, 'rb')
+    blank_reader = PyPDF2.PdfFileReader(blank_file)
     while to_add > 0:
-        # add blank page
+        writer.addPage(blank_reader.getPage(0))
         to_add -= 1
     writer.addPage(reader.getPage(pages))
 
@@ -21,6 +23,7 @@ def reformat(pages, reader, writer):
 
 
 path_to_file = ""
+path_to_blank = ""
 pdfFile = open(path_to_file, 'rb') # rb = read Binary
 org_reader = PyPDF2.PdfFileReader(pdfFile)
 totalPages = reader.numPages
