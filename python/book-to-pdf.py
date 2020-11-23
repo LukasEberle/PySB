@@ -1,11 +1,15 @@
 import PyPDF2
 
-# loop over PDF File add all pages expect the last, add blank pages until the total pages mod 4 = 0
-# reorder recursively
 
-
-def add_blanks(reader, writer):
-    pass
+def add_blanks(pages, reader, writer):
+    to_add = pages % 4
+    assert to_add != 0
+    for i in range(1, (pages-1)):
+        writer.addPage(reader.getPage(i))
+    while to_add > 0:
+        # add blank page
+        to_add -= 1
+    writer.addPage(reader.getPage(pages))
 
 
 def reformat(pages, reader, writer):
