@@ -8,8 +8,12 @@ def add_blanks(reader, writer):
     pass
 
 
-def reformat(page, reader, writer):
-    pass
+def reformat(pages, reader, writer):
+    for i in range(1, pages/2, 2):
+        writer.addPage(reader.getPage(i))
+        writer.addPage(reader.getPage(pages-i))
+        writer.addPage(reader.getPage(pages-(i+1)))
+        writer.addPage(reader.getPage(i + 1))
 
 
 path_to_file = ""
