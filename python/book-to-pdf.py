@@ -2,6 +2,12 @@ import PyPDF2
 import os
 
 
+# Please set these parameters
+path_to_file = ""
+output_file = ""
+book_back_left = True
+
+
 def reformat(pages, reader, writer, western):
     for i in range(0, pages, 2):
         if western:
@@ -18,9 +24,6 @@ def reformat(pages, reader, writer, western):
                 writer.addPage(reader.getPage(i + 1))
 
 
-path_to_file = "../data/mausritter-rules.pdf"
-output_file = "../data/mausritter-rules_printable.pdf"
-book_back_left = True
 pdfFile = open(path_to_file, 'rb')
 org_reader = PyPDF2.PdfFileReader(pdfFile)
 totalPages = org_reader.numPages
