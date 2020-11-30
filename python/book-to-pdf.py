@@ -21,7 +21,7 @@ def reformat(pages, reader, writer, western):
 path_to_file = "../data/mausritter-rules.pdf"
 output_file = "../data/mausritter-rules_printable.pdf"
 book_back_left = True
-pdfFile = open(path_to_file, 'rb') # rb = read Binary
+pdfFile = open(path_to_file, 'rb')
 org_reader = PyPDF2.PdfFileReader(pdfFile)
 totalPages = org_reader.numPages
 if not ((totalPages % 4) == 0):
@@ -35,6 +35,7 @@ if not ((totalPages % 4) == 0):
     book_writer = PyPDF2.PdfFileWriter()
     reformat(totalPages, prepared_reader, book_writer, book_back_left)
     prepared_reader.close()
+    os.remove('../data/tmp.pdf')
 else:
     book_writer = PyPDF2.PdfFileWriter()
     reformat(totalPages, org_reader, book_writer, book_back_left)
