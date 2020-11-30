@@ -40,5 +40,5 @@ else:
     reformat(totalPages, org_reader, book_writer, book_back_left)
     pdfFile.close()
 wb_output = open(output_file, 'wb')
-tmp_writer.write(wb_output)
+book_writer.write(wb_output)
 wb_output.close()
