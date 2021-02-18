@@ -26,33 +26,79 @@ def generate_entry(directory):
     directory = join(results_dir, directory)
     experiment_values.append(get_training_time(join(directory, 'evaluation_overall.csv')))
     directory = join(directory, 'log')
-    get_binning_time(directory)
+    log_file = get_logfile(directory)
+    time_log = get_time_log(directory)
+    experiment_values.append(get_binning_time(log_file))
+    for i in get_filter_time(log_file):
+        experiment_values.append(i)
+    # for x in
+    get_gnu_time(time_log)
     return experiment_values
 
 
 def get_training_time(log_file):
-    time = -1.0
     with open(log_file, "r", encoding="utf-8", errors="ignore") as evaluation:
         final_line = evaluation.readlines()[-1]
         time = float(final_line.split(',')[-1])
     return time
 
 
-def get_binning_time(log_dir):
+def get_binning_time(log_file):
+    # Feature Binning took 2296135 microseconds
+    bin_time_format = re.compile(r'Feature Binning took (\d+) microseconds')
+    # Reading feature vector took 20385 microseconds.
+    read_time_format = re.compile(r'Reading feature vector took (\d+) microseconds')
+    with open(log_file, "r", encoding="utf-8", errors="ignore") as log_text:
+        log_lines = log_text.read()
+        match_object = bin_time_format.findall(log_lines)
+        if match_object:
+            time = float(match_object[-1]) / 10000000
+        else:
+            match_object = read_time_format.findall(log_lines)
+            time = float(match_object[-1]) / 10000000
+    return time
+
+
+def get_filter_time(log_file):
+    # Filter Any Vector took 21386.7 seconds
+    fav_format = re.compile(r'Filter Any Vector took (\d+\.\d+) seconds')
+    # Filter Current Vector took 983.864 seconds
+    fcv_format = re.compile(r'Filter Current Vector took (\d+\.\d+) seconds')
+    # seconds and was called 130284 times
+    calls = re.compile(r'seconds and was called (\d+) times')
+    with open(log_file, "r", encoding="utf-8", errors="ignore") as log_text:
+        log_lines = log_text.read()
+        match_object = fav_format.findall(log_lines)
+        fa_time = float(match_object[-1])/10
+        match_object = fcv_format.findall(log_lines)
+        fc_time = float(match_object[-1])/10
+        match_object = calls.findall(log_lines)
+        fa_calls = float(match_object[-2])/10
+        fc_calls = float(match_object[-1])/10
+    time_and_calls = [fa_time, fa_calls, fc_time, fc_calls]
+    return time_and_calls
+
+
+def get_gnu_time(log_file):
+    pass
+
+
+def get_logfile(log_dir):
     log_files = []
     for x in listdir(log_dir):
         if isfile(join(log_dir, x)):
             log_files.append(x)
     log_file = join(log_dir, log_files[1])
-    print(log_file)
+    return log_file
 
 
-def get_filter_time(log_dir):
-    pass
-
-
-def get_gnu_time(log_dir):
-    pass
+def get_time_log(log_dir):
+    log_files = []
+    for x in listdir(log_dir):
+        if isfile(join(log_dir, x)):
+            log_files.append(x)
+    log_file = join(log_dir, log_files[2])
+    return log_file
 
 
 if __name__ == "__main__":
