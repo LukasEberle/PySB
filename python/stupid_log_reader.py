@@ -31,8 +31,8 @@ def generate_entry(directory):
     experiment_values.append(get_binning_time(log_file))
     for i in get_filter_time(log_file):
         experiment_values.append(i)
-    # for x in
-    get_gnu_time(time_log)
+    for i in get_gnu_time(time_log):
+        experiment_values.append(i)
     return experiment_values
 
 
@@ -80,7 +80,22 @@ def get_filter_time(log_file):
 
 
 def get_gnu_time(log_file):
-    pass
+    # User time (seconds): 95.76
+    user_time = re.compile(r'User time \(seconds\): (\d+\.\d+)')
+    # System time (seconds): 1.69
+    sys_time = re.compile(r'System time \(seconds\): (\d+\.\d+)')
+    # Percent of CPU this job got: 689%
+    cpu_percent = re.compile(r'Percent of CPU this job got: (\d\d\d)')
+    with open(log_file, "r", encoding="utf-8", errors="ignore") as log_text:
+        log_lines = log_text.read()
+        match_object = user_time.findall(log_lines)
+        t_user = float(match_object[0])
+        match_object = sys_time.findall(log_lines)
+        t_sys = float(match_object[0])
+        match_object = cpu_percent.findall(log_lines)
+        p_cpu = match_object[0]+'%'
+    gnu_time = [t_user, t_sys, p_cpu]
+    return gnu_time
 
 
 def get_logfile(log_dir):
