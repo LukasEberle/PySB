@@ -9,7 +9,6 @@ experiments = []
 for x in listdir(results_dir):
     if not isfile(join(results_dir, x)):
         experiments.append(x)
-print(experiments)
 data_points = ['', 'Training Time', 'Binning/Reading Time', 'Filter Any Time', 'Filter Any Calls',
                'Filter Current Time', 'Filter Current Calls', 'User Time', 'System Time', 'CPU Percentage']
 
@@ -18,7 +17,9 @@ def main():
     result_table = [data_points]
     for entry in experiments:
         result_table.append(generate_entry(entry))
-    print(result_table)
+    with open(join(results_dir, "results_overall_time.csv"), "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerows(result_table)
 
 
 def generate_entry(directory):
