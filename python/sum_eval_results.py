@@ -15,6 +15,8 @@ def main():
     with open(initial_table, "r", encoding="utf-8", errors="ignore") as evaluation:
         first_line = evaluation.readlines()[0].split(',')
         first_line[len(first_line)-1] = first_line[len(first_line)-1][:-1]
+        for i in range(0, len(first_line)):
+            first_line[i] = first_line[i].replace(".", "")
         summary.append(first_line)
     for directory in experiments:
         table = join(results_dir, directory, "evaluation_overall.csv")
@@ -23,7 +25,9 @@ def main():
             final_line[len(first_line)-1] = final_line[len(first_line)-1][:-1]
             final_line[0] = directory
             summary.append(final_line)
-    print(summary)
+    with open(join(results_dir, "evaluation_summary.csv"), "w", newline="") as f:
+        writer = csv.writer(f)
+        writer.writerows(summary)
 
 
 if __name__ == '__main__':
