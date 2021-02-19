@@ -9,8 +9,9 @@ experiments = []
 for x in listdir(results_dir):
     if not isfile(join(results_dir, x)):
         experiments.append(x)
-data_points = ['', 'Training Time', 'Binning/Reading Time', 'Filter Any Time', 'Filter Any Calls',
-               'Filter Current Time', 'Filter Current Calls', 'User Time', 'System Time', 'CPU Percentage']
+data_points = ['', 'Training Time', 'Min Bin', 'Max Bin', 'Average', 'Binning/Reading Time', 'Filter Any Time',
+               'Filter Any Calls', 'Filter Current Time', 'Filter Current Calls', 'User Time', 'System Time',
+               'CPU Percentage']
 
 
 def main():
@@ -29,6 +30,8 @@ def generate_entry(directory):
     directory = join(directory, 'log')
     log_file = get_logfile(directory)
     time_log = get_time_log(directory)
+    for i in get_bin_info(log_file):
+        experiment_values.append(i)
     experiment_values.append(get_binning_time(log_file))
     for i in get_filter_time(log_file):
         experiment_values.append(i)
@@ -42,6 +45,21 @@ def get_training_time(log_file):
         final_line = evaluation.readlines()[-1]
         time = float(final_line.split(',')[-1])
     return time
+
+
+def get_bin_info(log_file):
+    bin_info_format = re.compile(r'Number of bins (\d+) ;')
+    with open(log_file, "r", encoding="utf-8", errors="ignore") as log_text:
+        log_lines = log_text.read()
+        match_object = bin_info_format.findall(log_lines)
+        if match_object:
+            min_bins = min(match_object)
+            max_bins = max(match_object)
+            avg_bins = sum(match_object)/len(match_object)
+            return [min_bins, max_bins, avg_bins]
+        else:
+            return ['', '', '']
+
 
 
 def get_binning_time(log_file):
