@@ -100,9 +100,13 @@ def get_num_bin_stats(log_file):
         log_lines = log_text.read()
         match_object = num_bin_format.findall(log_lines)
         data = []
-        for i in match_object:
-            data.append(int(i))
-    return [max(data), min(data), sum(data)/len(data), data[int(len(data)/2)]]
+        if match_object:
+            for i in match_object:
+                data.append(int(i))
+            result_list = [max(data), min(data), sum(data)/len(data), data[int(len(data)/2)]]
+        else:
+            result_list = ['', '', '', '']
+    return result_list
 
 
 def get_gnu_time(log_file):
