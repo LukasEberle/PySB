@@ -1,5 +1,6 @@
 import time
 import typing
+from math import floor
 
 from typing import List
 
@@ -44,6 +45,19 @@ class WichmannHillRNG:
         self.s2 = (172 * self.s2) % 30307
         self.s3 = (170 * self.s3) % 30323
         return (self.s1/30269.0 + self.s2/30307.0 + self.s3/30323.0) % 1.0
+
+    def in_between(self, lower_border, upper_border):
+        """ Returns a pseudo-random number between lower_border (inclusive) and upper_boarder (exclusive)"""
+        n = self.rng()
+        r = upper_border - lower_border
+        return lower_border + r * n
+
+    def int_between(self, lower_border, upper_border):
+        """Sorry for the pun name. Returns a pseudo-random integer between
+            lower_border (inclusive) and upper_boarder (exclusive)"""
+        n = self.rng()
+        r = upper_border - lower_border
+        return int(floor(lower_border + r * n))
 
     def clock_seed(self):
         c = str(time.time())
