@@ -1,8 +1,8 @@
 import time
-import typing
+from typing import List
 from math import floor
 
-from typing import List
+
 
 
 def check_values(s1, s2, s3):
