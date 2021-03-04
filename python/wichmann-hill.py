@@ -3,8 +3,6 @@ from typing import List
 from math import floor
 
 
-
-
 def check_values(s1, s2, s3):
     assert 1 <= s1 <= 30000, "ERROR: Seed Values have to be between 1 and 30000"
     assert 1 <= s2 <= 30000, "ERROR: Seed Values have to be between 1 and 30000"
@@ -44,7 +42,7 @@ class WichmannHillRNG:
         self.s1 = (171 * self.s1) % 30269
         self.s2 = (172 * self.s2) % 30307
         self.s3 = (170 * self.s3) % 30323
-        return (self.s1/30269.0 + self.s2/30307.0 + self.s3/30323.0) % 1.0
+        return (self.s1 / 30269.0 + self.s2 / 30307.0 + self.s3 / 30323.0) % 1.0
 
     def in_between(self, lower_border, upper_border):
         """ Returns a pseudo-random number between lower_border (inclusive) and upper_boarder (exclusive)"""
@@ -58,6 +56,12 @@ class WichmannHillRNG:
         n = self.rng()
         r = upper_border - lower_border
         return int(floor(lower_border + r * n))
+
+    def flip(self):
+        if self.rng() < 0.5:
+            return False
+        else:
+            return True
 
     def clock_seed(self):
         c = str(time.time())
@@ -79,3 +83,8 @@ if __name__ == "__main__":
         for j in range(10):
             print(Random.rng())
         Random.reset_seed()
+    for i in range(10):
+        if Random.flip():
+            print("Heads")
+        else:
+            print("Tails")
