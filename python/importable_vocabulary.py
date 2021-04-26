@@ -3,8 +3,8 @@ from os import listdir
 from os.path import isfile, join
 
 # Setting important parameters
-deck_name = sys.argv[0]  # Pass Directory with Vocabulary Tables, it should be the same as the resulting decks name
-vocabulary_dir = join('C:\\', 'Users', 'Agando', 'Documents', 'Anki', 'GenkiI6')  # Build the complete directory
+deck_name = sys.argv[1]  # Pass Directory with Vocabulary Tables, it should be the same as the resulting decks name
+vocabulary_dir = join('C:\\', 'Users', 'Agando', 'Documents', 'Anki', deck_name)  # Build the complete directory
 vocabulary_by_tags = [f for f in listdir(vocabulary_dir) if isfile(join(vocabulary_dir, f))]  # List all tables
 
 
@@ -16,7 +16,13 @@ def main():
         read_vocabulary(rows, table)
     embolden_kanji(rows)
     rows = get_cue_card_list(rows)
+    result_file = join(vocabulary_dir, deck_name+".txt")
+    with open(result_file, "w", encoding="utf-8", errors="ignore") as data:
+        for line in rows:
+            cue_card = line[0] + "; " + line[1] + "; " + line[2] + "\n"
+            data.write(cue_card)
     # Checking the result TODO: Remove later
+    print(result_file)
     print(rows)
 
 
