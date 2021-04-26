@@ -15,6 +15,7 @@ def main():
     rows = []
     for table in vocabulary_by_tags:
         read_vocabulary(rows, table)
+    embolden_kanji(rows)
     # Checking the result TODO: Remove later
     print(rows)
 
@@ -44,6 +45,11 @@ def generate_tags(raw):
     """
     tag_string = raw[:-4]
     return tag_string.split("+")
+
+
+def embolden_kanji(rows):
+    for r in rows:
+        r[0] = "<b>" + r[0] + "</b>"
 
 
 if __name__ == "__main__":
