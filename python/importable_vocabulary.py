@@ -15,6 +15,7 @@ def main():
     for table in vocabulary_by_tags:
         read_vocabulary(rows, table)
     embolden_kanji(rows)
+    rows = get_cue_card_list(rows)
     # Checking the result TODO: Remove later
     print(rows)
 
@@ -67,6 +68,32 @@ def clean_data(data):
     result = data[:-1]
     result = result.split(';')
     return result
+
+
+def get_cue_card_list(rows):
+    """
+    Restructures the list, to resemble the final format.
+
+    :param rows: Current raw data
+    :return: The new format
+    """
+    cue_card_list = []
+    for row in rows:
+        entry = []
+        if not row[0] == " ":
+            entry.append(row[0] + "    ")
+        else:
+            entry.append("")
+        entry[0] += row[1]
+        entry.append(row[3])
+        tags = ""
+        for tag in row[4]:
+            tags += tag
+            tags += ", "
+        tags = tags[:-2]
+        entry.append(tags)
+        cue_card_list.append(entry)
+    return cue_card_list
 
 
 if __name__ == "__main__":
