@@ -87,7 +87,7 @@ def get_cue_card_list(rows):
     for row in rows:
         entry = []
         if not row[0] == " ":
-            entry.append(row[0] + "    ")
+            entry.append(row[0] + " - ")
         else:
             entry.append("")
         entry[0] += row[1]
@@ -95,8 +95,7 @@ def get_cue_card_list(rows):
         tags = ""
         for tag in row[4]:
             tags += tag
-            tags += ", "
-        tags = tags[:-2]
+            tags += " "
         entry.append(tags)
         cue_card_list.append(entry)
     return cue_card_list
