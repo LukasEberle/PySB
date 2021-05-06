@@ -1,11 +1,24 @@
 import sys
-from os import listdir
-from os.path import isfile, join
+import argparse
+from os import listdir, makedirs
+from os.path import isfile, join, exists
+from gtts import gTTS
 
 # Setting important parameters
-deck_name = sys.argv[1]  # Pass Directory with Vocabulary Tables, it should be the same as the resulting decks name
-vocabulary_dir = join('C:\\', 'Users', 'Agando', 'Documents', 'Anki', deck_name)  # Build the complete directory
+parser = argparse.ArgumentParser()
+parser.add_argument('--deck', help="The name of the vocabulary deck. It should be equal to the table directory.",
+                    type=str)
+parser.add_argument('--sound', help="This parameter determines, if the algorithm should generate a sound for each word",
+                    type=bool, default=False)
+args = parser.parse_args()
+vocabulary_dir = join('C:\\', 'Users', 'Agando', 'Documents', 'Anki', args.deck)  # Build the complete directory
 vocabulary_by_tags = [f for f in listdir(vocabulary_dir) if isfile(join(vocabulary_dir, f))]  # List all tables
+sound_dir = ""
+if args.sound:
+    sound_dir = join(vocabulary_dir, 'sound')
+    if not exists(sound_dir):
+        makedirs(sound_dir)
+        print(sound_dir)
 
 
 def main():
@@ -16,7 +29,7 @@ def main():
         read_vocabulary(rows, table)
     embolden_kanji(rows)
     rows = get_cue_card_list(rows)
-    result_file = join(vocabulary_dir, deck_name+".txt")
+    result_file = join(vocabulary_dir, args.deck+".txt")
     with open(result_file, "w", encoding="utf-8", errors="ignore") as data:
         for line in rows:
             cue_card = line[0] + "; " + line[1] + "; " + line[2] + "\n"
