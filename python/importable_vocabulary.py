@@ -2,7 +2,7 @@ import argparse
 from os import listdir, makedirs
 from os.path import isfile, join, exists
 from gtts import gTTS
-import time
+import sys
 
 # Parsing arguments
 parser = argparse.ArgumentParser()
@@ -25,32 +25,17 @@ if args.sound:
 
 def main():
     rows = []
-    start_time = time.time()
     for table in vocabulary_by_tags:
         read_vocabulary(rows, table)
-    end_time = time.time()
-    print(f"Reading took: {end_time - start_time}")
-    start_time = time.time()
     if args.sound:
         generate_pronunciations(rows)
-    end_time = time.time()
-    print(f"Generating pronunciations took: {end_time - start_time}")
-    start_time = time.time()
     embolden_kanji(rows)
-    end_time = time.time()
-    print(f"Emboldening Kanji took: {end_time - start_time}")
-    start_time = time.time()
     rows = get_cue_card_list(rows)
-    end_time = time.time()
-    print(f"Generating cue cards took: {end_time - start_time}")
-    start_time = time.time()
     result_file = join(output_path, args.deck+".txt")
     with open(result_file, "w", encoding="utf-8", errors="ignore") as data:
         for line in rows:
             cue_card = line[0] + "; " + line[1] + "; " + line[2] + "\n"
             data.write(cue_card)
-    end_time = time.time()
-    print(f"Writing took: {end_time - start_time}")
 
 
 def read_vocabulary(rows, table):
@@ -85,10 +70,24 @@ def generate_pronunciations(rows):
     Creates a mp3-file containing the pronunciation for each word.
 
     :param rows: List of all words
+    :param progressbar: A progress bar of the package "progress", this is necessary since this step can take a moment
     """
+    print(f"Generating {len(rows)} pronunciations. This might take a while.")
+    toolbar_width = 50  # Length of the progressbar
+    # Setup progressbar
+    sys.stdout.write("[%s]" % (" " * toolbar_width))
+    sys.stdout.flush()
+    sys.stdout.write("\b" * (toolbar_width + 1))
+
+    # Generating pronunciations
     for r in rows:
         filename = pronounce(r[1])
         r.append(filename)
+        # Adding to the progressbar
+        sys.stdout.write("#")
+        sys.stdout.flush()
+    sys.stdout.write("]\n")  # this ends the progress bar
+    print("Successfully generated pronunciations.")
 
 
 def embolden_kanji(rows):
