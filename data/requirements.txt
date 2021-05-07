@@ -6,3 +6,5 @@ beautifulsoup4
 selenium
 PyQt5
 PyPDF2
+gTTS
+progress
