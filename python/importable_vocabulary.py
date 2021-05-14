@@ -129,7 +129,7 @@ def get_cue_card_list(rows):
             entry.append("")
         entry[0] += row[1]
         if args.sound:
-            sound_name = "[sound:" + join('sound', row[-1]) + "]"
+            sound_name = f"[sound:{row[-1]}]"
             entry[0] += sound_name
         entry.append(row[3])
         tags = ""
