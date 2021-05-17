@@ -10,8 +10,6 @@ sys_name = "[T.E.A.R.S. L.L.]"
 
 def main():
     load_deck()
-    print(deck)
-    print(deck["1"]["content"])
 
 
 def listener():
@@ -34,15 +32,33 @@ def load_deck():
 
 
 def roll(rarity):
-    pass
+    options = deck[str(rarity)]["content"]
+    num = len(options)
+    fib = [1, 1, 2, 3, 5, 8, 13, 21]
+    for i in fib:
+        result = random.choice(options)
+        print(f"{sys_name} {result}")
+        time.sleep(i/10)
+    deal(result, rarity)
+    # print(f"{sys_name} Du ziehst die Karte: {result}!")
+    return result
+
+
+def roll_multiple(req):
+    results = []
+    for r in req:
+        results.append(roll(r))
+    print(f"{sys_name} Du erhälst die folgeneden Karten: {results}")
 
 
 def deal(card_name, rarity):
-    pass
+    deck[rarity]["content"].remove(card_name)
+    deck[rarity]["dealt"].append(card_name)
 
 
 def put_back(card_name, rarity):
-    pass
+    deck[rarity]["dealt"].remove(card_name)
+    deck[rarity]["content"].append(card_name)
 
 
 def update_deck():
