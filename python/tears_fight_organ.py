@@ -86,7 +86,7 @@ def parser(arguments, turn, participants):
             check = input(f"{sys_name} Bist du sicher, das du das Skript beenden möchtest?\n\t"
                           f"Dadurch werden alle Daten zurückgesetzt [j/n]: ")
             if check.strip().lower() == "j":
-                print(f"{sys_name} Vielen Dank für das nutzen eines {sys_name}-Terminals!")
+                print(f"{sys_name} Vielen Dank für das Nutzen eines {sys_name}-Terminals!")
                 print(f"{sys_name} Das Team wünscht viel Spaß im weiteren Abenteuers!")
                 time.sleep(2)
                 sys.exit(0)
@@ -127,7 +127,7 @@ def change_ini(fighter, ini):
 
 def end_turn(turn, participants):
     for fighter in participants:
-        if fighter in turn_dict.keys():
+        if str(fighter) in turn_dict.keys():
             turn_dict[str(fighter)] = (fighter, turn + fighter.ini_)
 
 
