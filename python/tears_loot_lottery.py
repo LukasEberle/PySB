@@ -59,6 +59,18 @@ def parser(arguments):
         elif arguments[0] == "putb":
             put_back(arguments[1], arguments[2])
             print(f"{sys_name} {arguments[1]} wurde in den Stapel mit Rarität {arguments[2]} zurückgelegt!")
+        elif arguments[0] == "quit":
+            check = input(f"{sys_name} Bist du sicher, das du das Skript beenden möchtest?\n\t"
+                          f"Dadurch gehen alle ungespeicherten Daten verloren [j/n]: ")
+            if check.strip().lower() == "j":
+                print(f"{sys_name} Vielen Dank für das Nutzen eines {sys_name}-Terminals!")
+                print(f"{sys_name} Das Team wünscht viel Spaß im weiteren Abenteuers!")
+                time.sleep(2)
+                sys.exit(0)
+            elif check.strip().lower() == "n":
+                pass
+            else:
+                print(f"{sys_name} Ungültige Eingabe! Bitte gebe \'j\' oder \'n\' ein!\n\tZurück ins Rundenmenu!")
         elif arguments[0] == "roll":
             print(f"{sys_name} Berechne Loot Lottery...")
             print(f"{sys_name} Du ziehst die Karte: {roll(arguments[1])}!")
