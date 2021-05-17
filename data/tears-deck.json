@@ -2,23 +2,22 @@
 
   "1" : {
     "content": ["Affenkot", "Arbeitshose", "Arbeitshose", "Essbare Beeren", "Essbare Beeren", "Essbare Beeren",
-      "Fahrradhelm", "Fahrradhelm", "Giftige Beeren", "Giftige Beeren", "Hammer", "Hammer", "Klappmesser",
-      "Klappmesser", "Klopapier", "Knueppel", "Knueppel", "Naegel", "Rohes Fleisch", "Rohes Fleisch", "Rostiges Messer",
-      "Rostiges Messer", "Scherbe", "Scherbe", "Schmutziges Wasser", "Schmutziges Wasser", "Speer", "Speer", "Speer",
-      "Speer", "Seil", "Seil", "Seil", "Stroh", "Teddybaer", "Teller", "Tischbein", "Zerbrochener Bogen", "Zombie-Arm",
+      "Giftige Beeren", "Hammer", "Hammer", "Klappmesser", "Klopapier", "Knueppel",  "Naegel", "Rohes Fleisch",
+      "Rohes Fleisch", "Rostiges Messer", "Rostiges Messer", "Schmutziges Wasser", "Schmutziges Wasser", "Speer",
+      "Speer", "Speer", "Seil", "Seil", "Seil", "Teddybaer",  "Tischbein", "Zerbrochener Bogen", "Zombie-Arm",
       "Zombie-Arm"],
-    "dealt": []
+    "dealt": ["Fahrradhelm", "Fahrradhelm", "Giftige Beeren", "Klappmesser", "Knueppel", "Scherbe", "Scherbe", "Stroh",
+      "Speer", "Teller"]
   },
 
   "2" : {
     "content": ["Baseballschlaeger", "Baseballschlaeger", "Blaumann", "Feuerwehrhelm", "Feuerwehrhelm", "Handschuhe",
-      "Handschuhe", "Hockeypanzer", "Hockeypanzer", "Jagdmesser", "Jagdmesser", "Kaputter Drehmomentschluessel",
-      "Kochtopf", "Kochtopf", "Leere Flasche", "Mistgabel", "Nahrung", "Nahrung", "Nahrung", "Nahrung", "Nahrung",
-      "Nahrung", "Nahrung", "Nahrung", "Pistole", "Pistole", "Pistole", "Regenjacke", "Regenjacke", "Regenjacke",
-      "Regenjacke", "Rollbrett(Holz)", "Rucksack", "Rucksack", "Rucksack", "Rucksack", "Schlafsack", "Schlafsack",
-      "Trinkwasser", "Trinkwasser", "Trinkwasser", "Trinkwasser", "Trinkwasser", "Trinkwasser", "Trinkwasser",
-      "Trinkwasser", "Trinkwasser", "Trinkwasser", "Trinkwasser"],
-    "dealt": []
+       "Hockeypanzer", "Hockeypanzer", "Kochtopf", "Kochtopf", "Leere Flasche", "Mistgabel", "Nahrung", "Nahrung",
+      "Nahrung", "Nahrung", "Nahrung", "Nahrung", "Nahrung", "Pistole", "Pistole",  "Regenjacke", "Regenjacke",
+      "Regenjacke", "Rucksack",   "Schlafsack", "Trinkwasser", "Trinkwasser", "Trinkwasser", "Trinkwasser",
+      "Trinkwasser", "Trinkwasser", "Trinkwasser", "Trinkwasser", "Trinkwasser", "Trinkwasser"],
+    "dealt": ["Jagdmesser", "Jagdmesser", "Handschuhe", "Kaputter Drehmomentschluessel", "Nahrung", "Pistole",
+      "Regenjacke", "Rollbrett(Holz)", "Rucksack", "Rucksack", "Rucksack", "Schlafsack", "Trinkwasser"]
   },
 
   "3" : {
@@ -26,9 +25,9 @@
       "Feuerzeug(Metall)", "Feuerzeug(Metall)", "Feuerzeug(Plastik)", "Feuerzeug(Plastik)", "Feuerzeug(Plastik)",
       "Gefechtshelm", "Ibuprofen 600", "Jagdgewehr", "Jagdgewehr", "Kugelsichere Weste", "Kugelsichere Weste",
       "Munition", "Munition", "Munition", "Munition", "Munition", "Munition", "Munition", "Munition", "Munition",
-      "Munition", "Munition", "Munition", "Pistole", "Pistole", "Pistole", "Schlagstock", "Schrotflinte",
-      "Vorschlaghammer", "Wasserreinigungstabletten", "Wasserreinigungstabletten", "Zerstaeuberpistole"],
-    "dealt": []
+      "Munition", "Pistole", "Pistole", "Pistole", "Schlagstock", "Schrotflinte", "Vorschlaghammer",
+      "Wasserreinigungstabletten", "Zerstaeuberpistole"],
+    "dealt": ["Munition", "Munition", "Taschenuhr(Gold)", "Wasserreinigungstabletten"]
   }
 
 }
