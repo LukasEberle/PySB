@@ -1,0 +1,12 @@
+[T.E.A.R.S. F.O.] Tippe eines der folgenden Kommandos ein. Falls nötig gebe die angegebenen Parameter an.
+
+    [add]   Parameter: Name der Karte, Rarität
+        Fügt dem Stapel der angegebenen Rarität die angegebene Karte als 'ausgeteilt' hinzu.
+    [help]  Gibt alle verfügbaren Kommandos und deren Parameter, falls vorhanden, an.
+    [roll]   Parameter: Rarität (auch mehrere möglich)
+        Für jede als Parameter übergebene Zahl wird ein Gegenstand der zugehörigen Rarität ausgegeben.
+    [list]  Listet alle vorhandenen Gegenstände nach Rarität auf.
+    [putb]  Parameter: Name der Karte, Rarität
+        Fügt die angegebene Karte mit der angegebenen Rarität dem entsprechenden Stapel hinzu und entfernt sie aus der
+        Liste der 'ausgeteilten' Karten.
+    [quit]  Beendet den Kampf und das Skript. Muss nochmal bejaht werden!
