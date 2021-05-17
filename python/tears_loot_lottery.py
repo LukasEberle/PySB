@@ -25,6 +25,7 @@ def listener():
 
 def lexer(cmd):
     arguments = cmd.split()
+    arguments[0] = arguments[0].lower()
     if arguments[0] == "add" or arguments[0] == "putb":
         if len(arguments) > 3:
             tmp = [arguments[0]]
@@ -74,6 +75,13 @@ def parser(arguments):
         elif arguments[0] == "roll":
             print(f"{sys_name} Berechne Loot Lottery...")
             print(f"{sys_name} Du ziehst die Karte: {roll(arguments[1])}!")
+        elif arguments[0] == "save":
+            check = input(f"{sys_name} Bist du sicher, dass du die vorhandenen Daten überschreiben möchtest? [j/n]: ")
+            if check.strip().lower() == "j":
+                update_deck()
+                print(f"{sys_name} Speichern erfolgreich!")
+            elif check.strip().lower() == "n":
+                print(f"Speichervorgang abgebrochen!")
     else:
         print(f"{sys_name} Es ist ein Fehler aufgetreten! Versuche es erneut!")
 
