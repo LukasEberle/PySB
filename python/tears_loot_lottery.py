@@ -54,6 +54,8 @@ def parser(arguments):
             print(f"{sys_name} {arguments[1]} wurde dem Stapel mit Rarität {arguments[2]} hinzugefügt!")
         elif arguments[0] == "help":
             help_cmd()
+        elif arguments[0] == "list":
+            list_cards()
         elif arguments[0] == "multi":
             print(f"{sys_name} Berechne Loot Lottery {len(arguments[1])} mal...")
             roll_multiple(arguments[1])
@@ -82,6 +84,8 @@ def parser(arguments):
                 print(f"{sys_name} Speichern erfolgreich!")
             elif check.strip().lower() == "n":
                 print(f"Speichervorgang abgebrochen!")
+        else:
+            print(f"{sys_name} {arguments[0]} ist kein gültiges Kommando!")
     else:
         print(f"{sys_name} Es ist ein Fehler aufgetreten! Versuche es erneut!")
 
@@ -135,6 +139,14 @@ def update_deck():
 def help_cmd():
     with open("loot_lottery_commands", 'r', encoding='utf-8') as data:
         print(data.read())
+
+
+def list_cards():
+    rarities = ["1", "2", "3"]
+    for r in rarities:
+        print(f"{sys_name} In dem Staple mit Rarität {r} befinden sich folgende Karten:")
+        for i in deck[r]["content"]:
+            print(i)
 
 
 if __name__ == '__main__':
