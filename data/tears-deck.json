@@ -1,0 +1,29 @@
+{
+
+  "1" : {
+    "content": ["Affenkot", "Arbeitshose", "Arbeitshose", "Essbare Beeren", "Essbare Beeren", "Essbare Beeren",
+      "Fahrradhelm", "Fahrradhelm", "Giftige Beeren", "Giftige Beeren", "Hammer", "Hammer", "Klappmesser",
+      "Klappmesser", "Knueppel", "Knueppel", "Rostiges Messer", "Rostiges Messer", "Speer", "Speer", "Speer", "Speer",
+      "Seil", "Seil", "Seil", "Teddybaer"],
+    "dealt": []
+  },
+
+  "2" : {
+    "content": ["Baseballschlaeger", "Baseballschlaeger", "Feuerwehrhelm", "Feuerwehrhelm", "Hockeypanzer",
+      "Hockeypanzer", "Jagdmesser", "Jagdmesser", "Kochtopf", "Kochtopf", "Nahrung", "Nahrung", "Nahrung", "Nahrung",
+      "Nahrung", "Pistole", "Pistole", "Pistole", "Regenjacke", "Regenjacke", "Regenjacke", "Regenjacke", "Rucksack",
+      "Rucksack", "Rucksack", "Rucksack", "Trinkwasser", "Trinkwasser", "Trinkwasser", "Trinkwasser", "Trinkwasser",
+      "Trinkwasser", "Trinkwasser", "Trinkwasser"],
+    "dealt": []
+  },
+
+  "3" : {
+    "content": ["Autoschluessel", "Feuerzeug(Metall)", "Feuerzeug(Metall)", "Feuerzeug(Metall)", "Feuerzeug(Plastik)",
+      "Feuerzeug(Plastik)", "Feuerzeug(Plastik)", "Gefechtshelm", "Jagdgewehr", "Jagdgewehr", "Kugelsichere Weste",
+      "Kugelsichere Weste", "Munition", "Munition", "Munition", "Munition", "Munition", "Munition", "Munition",
+      "Munition", "Munition", "Munition", "Munition", "Munition", "Pistole", "Pistole", "Pistole", "Schrotflinte",
+      "Wasserreinigungstabletten", "Wasserreinigungstabletten", "Zerstaeuberpistole"],
+    "dealt": []
+  }
+
+}
