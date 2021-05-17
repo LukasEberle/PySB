@@ -62,7 +62,10 @@ def put_back(card_name, rarity):
 
 
 def update_deck():
-    pass
+    global deck
+    filename = '../data/tears-deck.json'
+    with open(filename, 'w', encoding='utf-8') as out:
+        json.dump(deck, out)
 
 
 if __name__ == '__main__':
