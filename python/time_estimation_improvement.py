@@ -26,8 +26,8 @@ class Time:
         return self.hms
 
 
-time_file = '../data/times_test.csv'
-goal_file = '../data/working_set.json'
+time_file = ''
+goal_file = ''
 project_groups_file = '../data/project_association.json'
 times = {}
 groups = {}
@@ -109,10 +109,20 @@ def make_title(name, data_format):
     return f"{date}" + f"{name}" + "." + f"{data_format}"
 
 
+def times_sum():
+    result = Time(0, 0, 0)
+    for project in times:
+        step = Time(times[project]["goal"][0], times[project]["goal"][1], times[project]["goal"][2])
+        result += step
+    return result
+
+
 def generate_new_plan():
+    s = times_sum()
     f = open(make_title("plan", "txt"), "a")
     for project in times:
         f.write(project + ": " + make_string(times[project]["goal"]) + "\n")
+    f.write("Insgesamt: " + make_string(s.get_time()))
     with open(make_title("working_set", "json"), 'w', encoding='utf-8') as new_plan:
         json.dump(times, new_plan)
 

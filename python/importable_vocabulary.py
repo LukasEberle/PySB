@@ -70,7 +70,6 @@ def generate_pronunciations(rows):
     Creates a mp3-file containing the pronunciation for each word.
 
     :param rows: List of all words
-    :param progressbar: A progress bar of the package "progress", this is necessary since this step can take a moment
     """
     print(f"Generating {len(rows)} pronunciations. This might take a while.")
     toolbar_width = 50  # Length of the progressbar

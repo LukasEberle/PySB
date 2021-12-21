@@ -3,8 +3,8 @@ import os
 
 
 # Please set these parameters
-path_to_file = ""
-output_file = ""
+path_to_file = "F:\PnP\DSA\HerbaricumAventuricum_PDFA.pdf"
+output_file = "F:\PnP\DSA\HerbaricumAventuricum_printable.pdf"
 book_back_left = True
 
 
