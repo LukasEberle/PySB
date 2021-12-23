@@ -7,3 +7,5 @@ selenium
 PyQt5
 PyPDF2
 gTTS
+numpy
+matplotlib
